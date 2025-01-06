@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notes maker</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+    <div class="main w-full min-h-screen bg-zinc-900 px-40 pt-20 flex flex-col gap-10 items-center">
+        <h1 class="text-3xl text-blue-400 font-bold">You go ahead, We're here to remember!</h1>
+        <div class="form md:max-w-[500px] w-full">
+            <form class="w-full flex flex-col gap-4 text-white" action="/create" method="post" class="">
+                <input class="block bg-zinc-800 rounded-md p-2" type="text" name="title" id="" placeholder="Title" required>
+                <textarea class="block resize-none bg-zinc-800 rounded-md p-2 min-h-24" name="content" id=""
+                    placeholder="Write your Content here"></textarea>
+                <input class=" bg-blue-400 rounded-lg p-2 text-black" type="submit" value="Create Note">
+            </form>
+        </div>
+        <div class="w-full h-[1px] bg-zinc-100 rounded-md"></div>
+        <div class="tasks flex justify-start flex-wrap gap-4 min-h-full pb-10 pl-12">
+            <% if(files.length> 0) { %>
+                <% files.forEach((fileName)=>{%>
+                    <% val=fileName; %>
+                        <div class="bg-zinc-800 p-4 rounded-md w-[350px] flex flex-col items-center gap-2">
+                            <h2 class="text-white text-3xl tracking-tighter block-inline">
+                                <% if (val.length >= 25) { %>
+                                    <%= val.replace(/([A-Z])/g, " $1" ).trim().replace(".txt", "" ).substring(0,18) %>...
+                                <% } else { %>
+                                    <%= val.replace(/([A-Z])/g, " $1" ).trim().replace(".txt", "" ) %>
+                                <% } %>
+                                
+                            </h2>
+                            <a class="block-inline w-full" href="/file/<%=fileName%>">
+                                <button class="py-1 px-4 bg-blue-400 rounded-lg w-full">Read File</button>
+                            </a>
+                            <div class="block-inline w-full flex justify-between gap-4">
+                                <a class="block-inline w-1/2" href="/edit/<%=fileName%>">
+                                    <button class="py-1 px-4 bg-yellow-400 rounded-lg w-full">Edit File</button>
+                                </a>
+                                <a class="block-inline w-1/2" href="/deleteFile/<%=fileName%>">
+                                    <button class="py-1 px-4 bg-red-400 rounded-lg w-full">Delete file</button>
+                                </a>
+                            </div>
+                            
+                        </div>
+                        <% }) %>
+                            <% } else{ %>
+                                <div class="bg-zinc-800 p-4 rounded-md max-w-[400px] flex flex-col gap-2">
+                                    <h2 class="text-white text-3xl block-inline">Nothing available!! </h2>
+                                    <p class="text-blue-400 block-inline">Create your first note</p>
+                                </div>
+                                <% }%>
+
+
+        </div>
+    </div>
+</body>
+
+</html>

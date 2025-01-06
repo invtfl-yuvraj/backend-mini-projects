@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notes maker</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+    <div class="main w-full min-h-screen bg-zinc-900 px-40 pt-20 flex flex-col gap-10 items-center">
+        <% val=fileName; %>
+        <h1 class="text-3xl text-blue-400 font-bold"><%= val.replace(/([A-Z])/g, " $1" ).trim().replace(".txt", "" ) %> </h1>
+        <div class="form md:max-w-[500px] w-full">
+            <form class="w-full flex flex-col gap-4 text-white" action="/modify" method="post" >
+                <input class="hidden block bg-zinc-800 rounded-md p-2" type="text" name="previous" id="" placeholder="Title" value = '<%=fileName%>' required>
+                <input class="block bg-zinc-800 rounded-md p-2" type="text" name="title" id="" placeholder="Title" value = '<%=val.replace(/([A-Z])/g, " $1" ).trim().replace(".txt", "" )%>' required>
+                <textarea class="block resize-none bg-zinc-800 rounded-md p-2 min-h-24" name="content" id="" placeholder="Write your Content here" ><%=fileData%></textarea>
+                <input class=" bg-yellow-400 rounded-lg p-2 text-black" type="submit" value="Update">
+            </form>
+        </div>
+        <div class="w-full h-[1px] bg-zinc-100 rounded-md"></div>
+        
+    </div>
+</body>
+
+</html>
