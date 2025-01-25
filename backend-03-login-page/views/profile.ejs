@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+
+<body>
+
+    <div class="main w-full min-h-screen bg-zinc-900 px-16 pt-20 flex flex-col gap-10 items-center">
+        <h1 class="text-3xl text-blue-400 font-bold">User Profile</h1>
+        <div class="w-full h-[1px] bg-zinc-100 rounded-md"></div>
+
+        <div class="users flex justify-center flex-wrap gap-4 min-h-full w-full pl-4">
+
+            <%if (loggedin) { %>
+
+                    <div class="user h-96 min-w-64 bg-zinc-800 rounded-md p-4 flex flex-col justify-between">
+                        <div class="w-full h-full">
+                            <div class="w-full h-52 bg-zinc-700 rounded-md overflow-hidden">
+                                <img class="w-full h-full object-cover" src="https://img.freepik.com/premium-vector/traveler-man-character-illustration-with-backpack_493925-764.jpg?w=360" alt="">
+                            </div>
+                            <div class="pt-4">
+                                <h2 class="text-xl text-white font-bold"><%= user.username%></h2>
+                                <h3 class="text-sm text-zinc-500 font-medium"><%= user.email%></h3>
+                            </div>
+                        </div>
+    
+                    </div>
+
+                <% } else { %>
+
+
+                    <div class="bg-zinc-800 p-4 m-auto rounded-md max-w-[400px] flex flex-col gap-2">
+                        <h2 class="text-white text-3xl block-inline">Nothing available!! </h2>
+                        <a href="/">
+                            <p class="text-blue-400 block-inline">Create your account</p>
+                        </a>
+                    </div>
+                    <% } %>
+
+
+
+
+        </div>
+        <div class="w-full h-[1px] bg-zinc-100 rounded-md"></div>
+        <div class="pb-10">
+            <a class="w-full" href="/logout">
+                <button class="bg-red-400 rounded-lg p-2 px-8 text-black">
+                    Log out
+                </button>
+            </a>
+
+        </div>
+
+
+    </div>
+
+
+
+
+</body>
+
+</html>
