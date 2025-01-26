@@ -100,5 +100,24 @@ app.get("/profile", isLoggedIn, (req, res) => {
     res.redirect("/login");
 })
 
+app.get("/profile/:id/createPost", isLoggedIn, async (req, res) => {
+    let user = await userModel.findOne({
+        _id : req.params.id
+    }) 
+
+    if (!user) return res.redirect("/login");
+
+    res.render("createPost", {user});
+})
+
+app.get("/profile/:id/posts", isLoggedIn, async (req, res) => {
+    let user = await userModel.findOne({
+        _id : req.params.id
+    }) 
+
+    if (!user) return res.redirect("/login");
+
+    res.render("posts" , {user});
+})
 
 app.listen(3000);

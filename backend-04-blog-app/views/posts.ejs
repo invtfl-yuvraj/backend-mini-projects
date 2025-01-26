@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+
+<body>
+
+    <div class="main w-full min-h-screen bg-zinc-900 px-16 pt-20 flex flex-col gap-10 items-center">
+        <h1 class="text-3xl text-blue-400 font-bold">All posts</h1>
+        <div class="w-full h-[1px] bg-zinc-100 rounded-md"></div>
+
+        <div class="w-full h-full items-center pb-10">
+
+            <!-- posts -->
+
+
+
+            <div class="posts flex flex-col justify-start items-center flex-wrap gap-4 min-h-full w-full pl-4">
+
+                <!-- single post  -->
+
+                <div class="w-full">
+
+                    <div class="user h-full w-full min-w-64 bg-zinc-800 rounded-md p-4 gap-2 flex flex-col justify-between">
+
+                        <h3 class="text-white">Posted by <span class="text-blue-400 font-bold">@username</span> at <span
+                                class="text-white italic underline"> 12:00 23-01-2024</span></h3>
+                        <h4 class="text-2xl text-white font-bold"> This is my First Post</h4>
+                        <p class="text-white ">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellat harum sed temporibus.
+                            Veritatis atque, nam veniam facere illo quos, recusandae molestias cumque totam numquam, aspernatur nobis
+                            aperiam maxime mollitia. Quisquam ipsum nam qui. Voluptatibus, animi doloribus. Vero iusto explicabo ea
+                            similique perferendis, nesciunt iste quia hic enim non saepe, ex nobis cumque eum praesentium debitis quo. Harum
+                            ab aspernatur iure quae vero natus dolor eius sapiente eveniet voluptatem, in aperiam mollitia, cum iusto
+                            perferendis illo veritatis voluptatum accusantium quidem iste tenetur, omnis officiis? Rem fugit exercitationem
+                            delectus perspiciatis suscipit. Aut quas iste veniam illum amet libero rerum. Odit, ad est.</p>
+                        <p class="text-yellow-400 font-bold">5 likes</p>
+                        <div class="flex gap-4">
+                            <a class="block-inline text-blue-400 font-bold" href="">
+                                Like
+                            </a>
+                            <a class="block-inline text-zinc-400 font-bold" href="">
+                                Edit
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Go back  -->
+
+                <a class="" href="/profile/<%=user._id%>/">
+                    <button class="bg-blue-400 w-full rounded-lg p-2 px-8 text-black">
+                        Go back
+                    </button>
+                </a>
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+</body>
+
+</html>

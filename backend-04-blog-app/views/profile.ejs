@@ -12,45 +12,95 @@
 <body>
 
     <div class="main w-full min-h-screen bg-zinc-900 px-16 pt-20 flex flex-col gap-10 items-center">
-        <h1 class="text-3xl text-blue-400 font-bold">User Profile</h1>
+        <h1 class="text-3xl text-blue-400 font-bold">Dashboard</h1>
         <div class="w-full h-[1px] bg-zinc-100 rounded-md"></div>
 
-        <div class="users flex justify-center flex-wrap gap-4 min-h-full w-full pl-4">
+        <div class="w-full h-full grid grid-cols-3 items-center pb-10" >
 
-            <div class="user h-96 min-w-64 bg-zinc-800 rounded-md p-4 flex flex-col justify-between">
-                <div class="w-full h-full">
-                    <div class="w-full h-52 bg-zinc-700 rounded-md overflow-hidden">
-                        <img class="w-full h-full object-cover"
-                            src="https://img.freepik.com/premium-vector/traveler-man-character-illustration-with-backpack_493925-764.jpg?w=360"
-                            alt="">
+            <!-- profile  -->
+
+            <div class="users flex flex-col justify-start items-center flex-wrap gap-4 min-h-full w-full pl-4 col-span-1">
+
+                <h2 class="text-3xl text-blue-400 font-bold">User Profile</h2>
+                <div class="user h-full w-1/2 min-w-64 bg-zinc-800 rounded-md p-4 flex flex-col justify-between">
+                    <div class="w-full h-full">
+                        <div class="w-full h-52 bg-zinc-700 rounded-md overflow-hidden">
+                            <img class="w-full h-full object-cover"
+                                src="https://img.freepik.com/premium-vector/traveler-man-character-illustration-with-backpack_493925-764.jpg?w=360"
+                                alt="">
+                        </div>
+                        <div class="pt-4">
+                            <h3 class="text-sm text-blue-500 font-medium">
+                                @<%= user.username%>
+                            </h3>
+                            <h2 class="text-xl text-white font-bold">
+                                <%= user.name%>
+                            </h2>
+                            <h3 class="text-sm text-zinc-500 font-medium">
+                                <%= user.email%>
+                            </h3>
+                        </div>
                     </div>
-                    <div class="pt-4">
-                        <h3 class="text-sm text-blue-500 font-medium">
-                            @<%= user.username%>
-                        </h3>
-                        <h2 class="text-xl text-white font-bold">
-                            <%= user.name%>
-                        </h2>
-                        <h3 class="text-sm text-zinc-500 font-medium">
-                            <%= user.email%>
-                        </h3>
+                    <div class="w-full flex flex-wrap flex-col gap-2 mt-4">
+                        <a class="w-full" href="/profile/<%=user._id%>/createPost">
+                            <button class="bg-green-400 w-full rounded-lg p-2 px-8 text-black">
+                                Create Post
+                            </button>
+                        </a>
+                        <a class="w-full" href="/logout">
+                            <button class="bg-red-400 w-full rounded-lg p-2 px-8 text-black">
+                                Log out
+                            </button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- posts -->
+
+
+
+            <div class="posts flex flex-col justify-start items-center flex-wrap gap-4 min-h-full w-full pl-4 col-span-2">
+
+                <h2 class="text-3xl text-blue-400 font-bold">Recent Posts</h2>
+
+                <!-- single post  -->
+
+                <div class="w-full">
+
+                    <div class="user h-full w-full min-w-64 bg-zinc-800 rounded-md p-4 gap-2 flex flex-col justify-between">
+
+                        <h3 class="text-white">Posted by <span class="text-blue-400 font-bold">@username</span> at <span class="text-white italic underline"> 12:00 23-01-2024</span></h3>
+                        <h4 class="text-2xl text-white font-bold"> This is my First Post</h4>
+                        <p class="text-white ">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellat harum sed temporibus.
+                            Veritatis atque, nam veniam facere illo quos, recusandae molestias cumque totam numquam, aspernatur nobis
+                            aperiam maxime mollitia. Quisquam ipsum nam qui. Voluptatibus, animi doloribus. Vero iusto explicabo ea
+                            similique perferendis, nesciunt iste quia hic enim non saepe, ex nobis cumque eum praesentium debitis quo. Harum
+                            ab aspernatur iure quae vero natus dolor eius sapiente eveniet voluptatem, in aperiam mollitia, cum iusto
+                            perferendis illo veritatis voluptatum accusantium quidem iste tenetur, omnis officiis? Rem fugit exercitationem
+                            delectus perspiciatis suscipit. Aut quas iste veniam illum amet libero rerum. Odit, ad est.</p>
+                        <p class="text-yellow-400 font-bold">5 likes</p>
+                        <div class="flex gap-4">
+                            <a class="block-inline text-blue-400 font-bold" href="">
+                                Like
+                            </a>
+                            <a class="block-inline text-zinc-400 font-bold" href="">
+                                Edit
+                            </a>
+                        </div>
+
                     </div>
                 </div>
 
+
+                <!-- view all posts  -->
+
+                <a class="" href="/profile/<%=user._id%>/posts">
+                    <button class="bg-yellow-400 w-full rounded-lg p-2 px-8 text-black">
+                        View all posts
+                    </button>
+                </a>
             </div>
-
-
-
-
-
-        </div>
-        <div class="w-full h-[1px] bg-zinc-100 rounded-md"></div>
-        <div class="pb-10">
-            <a class="w-full" href="/logout">
-                <button class="bg-red-400 rounded-lg p-2 px-8 text-black">
-                    Log out
-                </button>
-            </a>
 
         </div>
 
