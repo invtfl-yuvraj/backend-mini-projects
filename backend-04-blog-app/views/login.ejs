@@ -15,22 +15,19 @@
         <h1 class="text-5xl text-blue-400 font-bold">Start with your first post</h1>
 
         <div class="w-full h-[1px] bg-zinc-800 rounded-md"></div>
-        <h2 class="text-3xl text-grey-400 font-bold">Create an Account!!</h2>
+        <h2 class="text-3xl text-grey-400 font-bold">Login to your Account!!</h2>
         <div class="form md:max-w-[500px] w-full border-2 border-black rounded-md p-4">
-            <form class="w-full flex flex-col gap-4 text-white" action="/register" method="post">
-                <input class="block bg-zinc-800 rounded-md p-2 outline-none" type="text" name="name" id="" placeholder="Name" required>
-                <input class="block bg-zinc-800 rounded-md p-2 outline-none" type="text" name="username" id="" placeholder="Username" required>
+            <form class="w-full flex flex-col gap-4 text-white" action="/login" method="post">
                 <input class="block bg-zinc-800 rounded-md p-2 outline-none" type="email" name="email" id="" placeholder="Email" required>
                 <input class="block bg-zinc-800 rounded-md p-2 outline-none" type="password" name="password" id="" placeholder="Password"
                     required>
-                <input class="block bg-zinc-800 rounded-md p-2 outline-none" type="number" name="age" id="" placeholder="Age" required>
-                <input class=" bg-blue-400 rounded-lg p-2 text-white font-semibold" type="submit" value="Sign up">
+                <input class=" bg-blue-400 rounded-lg p-2 text-white font-semibold" type="submit" value="Login">
 
                 <div class="flex justify-center gap-2 text-grey-400 px-6">
 
-                    <p class="text-slate-500"> <u>Already created an account ?</u></p>
-                    <a class="text-blue-600" href="/login">
-                        Login
+                    <p class="text-slate-500"> <u>Don't have an account ?</u></p>
+                    <a class="text-blue-600" href="/">
+                        Sign up
                     </a>
 
                 </div>
