@@ -5,6 +5,7 @@ const app = express();
 const cookieParser = require("cookie-parser");
 const bcrypt = require("bcrypt");
 const userModel = require("./models/user");
+const postModel = require("./models/post");
 const jwt = require("jsonwebtoken");
 
 
@@ -83,13 +84,14 @@ function isLoggedIn(req, res, next) {
         req.user = data;
         next();
     }
-    
 }
 
 app.get("/profile/:id", isLoggedIn, async (req, res) => {
     let user = await userModel.findOne({
         _id : req.params.id
-    }) 
+    }).populate("posts");
+
+    console.log(user)
 
     if (!user) return res.redirect("/login");
 
@@ -110,14 +112,35 @@ app.get("/profile/:id/createPost", isLoggedIn, async (req, res) => {
     res.render("createPost", {user});
 })
 
-app.get("/profile/:id/posts", isLoggedIn, async (req, res) => {
+app.post("/profile/:id/createpost", isLoggedIn, async (req, res) => {
     let user = await userModel.findOne({
+        _id : req.params.id
+    })
+    if (!user) return res.redirect("/login");
+
+    let {content, title} = req.body;
+    let post = await postModel.create({
+        user : user._id,
+        content,
+        title
+    })
+
+    user.posts.push(post._id);
+    await user.save();
+
+    res.redirect(`/profile/${user._id}`);
+})
+
+app.get("/profile/:id/posts", isLoggedIn, async (req, res) => {
+    let posts = await postModel.find().sort({date : -1}).populate("user");
+
+    console.log(posts);
+
+    let currUser = await userModel.findOne({
         _id : req.params.id
     }) 
 
-    if (!user) return res.redirect("/login");
-
-    res.render("posts" , {user});
+    res.render("posts" , {posts, currUser});
 })
 
 app.listen(3000);

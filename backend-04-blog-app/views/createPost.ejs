@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Page</title>
+    <title>Create Post</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="/stylesheets/style.css">
 </head>
@@ -24,7 +24,7 @@
 
                 <div class="user h-full w-full flex justify-center ">
 
-                    <form class="flex flex-col justify-center gap-4" action=" ">
+                    <form class="flex flex-col justify-center gap-4" action="/profile/<%=user._id%>/createpost" method = "post">
                         <input class="bg-zinc-800 rounded-md p-4 min-w-[600px] text-white" type="text" name="title" id=""
                             placeholder="Post Title">
                         <textarea name="content" placeholder="What's on your mind ?"
