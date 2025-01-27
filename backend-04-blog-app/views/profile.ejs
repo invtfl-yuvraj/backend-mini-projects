@@ -24,11 +24,11 @@
                 <h2 class="text-3xl text-blue-400 font-bold">User Profile</h2>
                 <div class="user h-full w-1/2 min-w-64 bg-zinc-800 rounded-md p-4 flex flex-col justify-between">
                     <div class="w-full h-full">
-                        <div class="w-full h-52 bg-zinc-700 rounded-md overflow-hidden">
+                        <a class="w-full h-52 bg-zinc-700 rounded-md overflow-hidden" href="/profile/<%=user._id%>/changeProfile">
                             <img class="w-full h-full object-cover"
-                                src="https://img.freepik.com/premium-vector/traveler-man-character-illustration-with-backpack_493925-764.jpg?w=360"
+                                src="/images/uploads/<%=user.profilePic%>"
                                 alt="">
-                        </div>
+                        </a>
                         <div class="pt-4">
                             <h3 class="text-sm text-blue-500 font-medium">
                                 @<%= user.username%>

@@ -3,16 +3,20 @@ const app = express();
 
 
 const cookieParser = require("cookie-parser");
+const path = require("path");
 const bcrypt = require("bcrypt");
 const userModel = require("./models/user");
 const postModel = require("./models/post");
 const jwt = require("jsonwebtoken");
+const upload = require("./config/multerConfig");
 
 
 app.set("view engine", "ejs");
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }))
+app.use(express.static(path.join(__dirname, "public")));
 app.use(cookieParser());
+
 
 
 app.get("/", (req, res) => {
@@ -131,10 +135,37 @@ app.post("/profile/:id/createpost", isLoggedIn, async (req, res) => {
     res.redirect(`/profile/${user._id}`);
 })
 
+app.get("/profile/:id/changeProfile", isLoggedIn, async (req, res) => {
+
+    let userid = req.user.userid;
+
+    res.render("changeProfile" , {userid});
+})
+
+app.post("/upload", isLoggedIn, upload.single("image"), async (req, res) => {
+
+    let user = await userModel.findOne({
+        _id : req.user.userid
+    });
+
+    user.profilePic = req.file.filename;
+    await user.save();
+    res.redirect(`/profile/${req.user.userid}`);
+})
+
+app.get("/remove", isLoggedIn, upload.single("image"), async (req, res) => {
+
+    let user = await userModel.findOne({
+        _id : req.user.userid
+    });
+
+    user.profilePic = "default.jpeg";
+    await user.save();
+    res.redirect(`/profile/${req.user.userid}`);
+})
+
 app.get("/posts", isLoggedIn, async (req, res) => {
     let posts = await postModel.find().sort({ date: -1 }).populate("user");
-
-    console.log(posts);
 
     let currUser = req.user.userid;
 
@@ -202,4 +233,7 @@ app.post("/update/:id", isLoggedIn, async (req, res) => {
     res.redirect(`/profile/${req.user.userid}`);
 })
 
+
+
 app.listen(3000);
+
