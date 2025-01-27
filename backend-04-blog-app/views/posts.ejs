@@ -25,48 +25,61 @@
 
                 <!-- single post  -->
 
-                <% posts.forEach((post)=>{ %>
+                <% if (posts.length===0){ %>
 
-                    <div class="w-full">
+                    <div class="bg-zinc-800 p-4 m-auto rounded-md max-w-[400px] flex flex-col gap-2">
+                        <h2 class="text-white text-3xl block-inline">Not available!! </h2>
+                        <a href="/profile/<%=currUser%>/createPost">
+                            <p class="text-blue-400 block-inline">Create first Post</p>
 
-                        <div class="user h-full w-full min-w-64 bg-zinc-800 rounded-md p-4 gap-2 flex flex-col justify-between">
-
-                            <h3 class="text-white">Posted by <span class="text-blue-400 font-bold">
-                                    <%=post.user.username%>
-                                </span> on <small class="text-white italic text-zinc-400">
-                                    <%=post.toIST()%>
-                                </small></h3>
-                            <h4 class="text-2xl text-white font-bold">
-                                <%=post.title%>
-                            </h4>
-                            <p class="text-white ">
-                                <%=post.content%>
-                            </p>
-                            <p class="text-yellow-400 font-bold">
-                                <%=post.likes.length%> likes
-                            </p>
-                            <div class="flex gap-4">
-                                <a class="block-inline text-blue-400 font-bold" href="posts/like/<%=post._id%>">
-                                    <%= post.likes.indexOf(currUser)=== -1 ? "Like" : "Unlike"%>
-                                </a>
-                                <a class="block-inline text-zinc-400 font-bold" href="">
-                                    Edit
-                                </a>
-                            </div>
-
-                        </div>
+                        </a>
                     </div>
 
+                    <% } else { %>
 
-                    <% }) %>
+                        <% posts.forEach((post)=>{ %>
 
-                        <!-- Go back  -->
+                            <div class="w-full">
 
-                        <a class="" href="/profile/<%=currUser%>/">
-                            <button class="bg-blue-400 w-full rounded-lg p-2 px-8 text-black">
-                                Go back
-                            </button>
-                        </a>
+                                <div class="user h-full w-full min-w-64 bg-zinc-800 rounded-md p-4 gap-2 flex flex-col justify-between">
+
+                                    <h3 class="text-white">Posted by <span class="text-blue-400 font-bold">
+                                            <%=post.user.username%>
+                                        </span> on <small class="text-white italic text-zinc-400">
+                                            <%=post.toIST()%>
+                                        </small></h3>
+                                    <h4 class="text-2xl text-white font-bold">
+                                        <%=post.title%>
+                                    </h4>
+                                    <p class="text-white ">
+                                        <%=post.content%>
+                                    </p>
+                                    <p class="text-yellow-400 font-bold">
+                                        <%=post.likes.length%> likes
+                                    </p>
+                                    <div class="flex gap-4">
+                                        <a class="block-inline text-blue-400 font-bold" href="posts/like/<%=post._id%>">
+                                            <%= post.likes.indexOf(currUser)===-1 ? "Like" : "Unlike" %>
+                                        </a>
+                                        <!-- <a class="block-inline text-zinc-400 font-bold" href="">
+                                    Edit
+                                </a> -->
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+                            <% }) %>
+                                <% } %>
+
+                                    <!-- Go back  -->
+
+                                    <a class="" href="/profile/<%=currUser%>/">
+                                        <button class="bg-blue-400 w-full rounded-lg p-2 px-8 text-black">
+                                            Go back
+                                        </button>
+                                    </a>
             </div>
         </div>
 

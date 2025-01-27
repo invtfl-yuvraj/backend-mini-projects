@@ -55,7 +55,7 @@
                     </div>
                 </div>
 
-                
+
             </div>
 
             <!-- posts -->
@@ -65,44 +65,68 @@
             <div class="posts flex flex-col justify-start items-center flex-wrap gap-4 min-h-full w-full pl-4 col-span-2">
 
 
-                    <h2 class="text-3xl text-blue-400 font-bold">Your Recent Posts</h2>
-                    
+                <h2 class="text-3xl text-blue-400 font-bold">Your Recent Posts</h2>
+
 
 
                 <!-- single post  -->
 
-                <% user.posts.reverse().forEach((post)=>{ %>
+                <% if (user.posts.length===0){ %>
 
-                    <div class="w-full">
+                    <div class="bg-zinc-800 p-4 m-auto rounded-md max-w-[400px] flex flex-col gap-2">
+                        <h2 class="text-white text-3xl block-inline">Nothing available!! </h2>
+                        <a href="/profile/<%=user._id%>/createPost">
+                            <p class="text-blue-400 block-inline">Create your first Post</p>
 
-                        <div class="user h-full w-full min-w-64 bg-zinc-800 rounded-md p-4 gap-2 flex flex-col justify-between">
-
-                            <h3 class="text-white">Posted by <span class="text-blue-400 font-bold">
-                                    <%=user.username%>
-                                </span> on <small class="text-white italic text-zinc-400"> <%=post.toIST()%></small></h3>
-                            <h4 class="text-2xl text-white font-bold"> <%=post.title%></h4>
-                            <p class="text-white "><%=post.content%></p>
-                            <p class="text-yellow-400 font-bold"><%=post.likes.length%> likes</p>
-                            <div class="flex gap-4">
-                                <a class="block-inline text-blue-400 font-bold" href="/like/<%=post._id%>">
-                                    <%= post.likes.indexOf(user._id)=== -1 ? "Like" : "Unlike"%>
-                                </a>
-                                <a class="block-inline text-zinc-400 font-bold" href="">
-                                    Edit
-                                </a>
-                            </div>
-
-                        </div>
+                        </a>
                     </div>
 
-                    <% }) %>
+                    <% } else { %>
 
-                    <!-- view all posts  -->
-                    <a class="" href="/posts">
-                        <button class="bg-yellow-400 w-full rounded-lg p-2 px-8 text-black">
-                            View all posts
-                        </button>
-                    </a>
+                        <% user.posts.reverse().forEach((post)=>{ %>
+
+                            <div class="w-full">
+
+                                <div class="user h-full w-full min-w-64 bg-zinc-800 rounded-md p-4 gap-2 flex flex-col justify-between">
+
+                                    <h3 class="text-white">Posted by <span class="text-blue-400 font-bold">
+                                            <%=user.username%>
+                                        </span> on <small class="text-white italic text-zinc-400">
+                                            <%=post.toIST()%>
+                                        </small></h3>
+                                    <h4 class="text-2xl text-white font-bold">
+                                        <%=post.title%>
+                                    </h4>
+                                    <p class="text-white ">
+                                        <%=post.content%>
+                                    </p>
+                                    <p class="text-yellow-400 font-bold">
+                                        <%=post.likes.length%> likes
+                                    </p>
+                                    <div class="flex gap-4">
+                                        <a class="block-inline text-blue-400 font-bold" href="/like/<%=post._id%>">
+                                            <%= post.likes.indexOf(user._id)===-1 ? "Like" : "Unlike" %>
+                                        </a>
+                                        <a class="block-inline text-zinc-400 font-bold" href="/edit/<%=post._id%>">
+                                            Edit
+                                        </a>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <% }) %>
+
+                                <% } %>
+
+
+
+                                    <!-- view all posts  -->
+                                    <a class="" href="/posts">
+                                        <button class="bg-yellow-400 w-full rounded-lg p-2 px-8 text-black">
+                                            View all posts
+                                        </button>
+                                    </a>
 
             </div>
 
