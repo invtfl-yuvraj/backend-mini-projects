@@ -46,8 +46,8 @@
                                 <%=post.likes.length%> likes
                             </p>
                             <div class="flex gap-4">
-                                <a class="block-inline text-blue-400 font-bold" href="">
-                                    Like
+                                <a class="block-inline text-blue-400 font-bold" href="posts/like/<%=post._id%>">
+                                    <%= post.likes.indexOf(currUser)=== -1 ? "Like" : "Unlike"%>
                                 </a>
                                 <a class="block-inline text-zinc-400 font-bold" href="">
                                     Edit
@@ -62,7 +62,7 @@
 
                         <!-- Go back  -->
 
-                        <a class="" href="/profile/<%=currUser._id%>/">
+                        <a class="" href="/profile/<%=currUser%>/">
                             <button class="bg-blue-400 w-full rounded-lg p-2 px-8 text-black">
                                 Go back
                             </button>

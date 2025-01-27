@@ -64,15 +64,10 @@
 
             <div class="posts flex flex-col justify-start items-center flex-wrap gap-4 min-h-full w-full pl-4 col-span-2">
 
-                <div class="flex justify-between w-full px-10">
+
                     <h2 class="text-3xl text-blue-400 font-bold">Your Recent Posts</h2>
-                    <!-- view all posts  -->
-                    <a class="" href="/profile/<%=user._id%>/posts">
-                        <button class="bg-yellow-400 w-full rounded-lg p-2 px-8 text-black">
-                            View all posts
-                        </button>
-                    </a>
-                </div>
+                    
+
 
                 <!-- single post  -->
 
@@ -90,7 +85,7 @@
                             <p class="text-yellow-400 font-bold"><%=post.likes.length%> likes</p>
                             <div class="flex gap-4">
                                 <a class="block-inline text-blue-400 font-bold" href="/like/<%=post._id%>">
-                                    Like
+                                    <%= post.likes.indexOf(user._id)=== -1 ? "Like" : "Unlike"%>
                                 </a>
                                 <a class="block-inline text-zinc-400 font-bold" href="">
                                     Edit
@@ -101,6 +96,13 @@
                     </div>
 
                     <% }) %>
+
+                    <!-- view all posts  -->
+                    <a class="" href="/posts">
+                        <button class="bg-yellow-400 w-full rounded-lg p-2 px-8 text-black">
+                            View all posts
+                        </button>
+                    </a>
 
             </div>
 

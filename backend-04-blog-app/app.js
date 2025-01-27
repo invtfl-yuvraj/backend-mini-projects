@@ -131,16 +131,52 @@ app.post("/profile/:id/createpost", isLoggedIn, async (req, res) => {
     res.redirect(`/profile/${user._id}`);
 })
 
-app.get("/profile/:id/posts", isLoggedIn, async (req, res) => {
+app.get("/posts", isLoggedIn, async (req, res) => {
     let posts = await postModel.find().sort({date : -1}).populate("user");
 
     console.log(posts);
 
-    let currUser = await userModel.findOne({
-        _id : req.params.id
-    }) 
+    let currUser = req.user.userid;
 
     res.render("posts" , {posts, currUser});
+})
+
+app.get("/like/:id", isLoggedIn, async (req, res) => {
+
+    let post = await postModel.findOne({
+        _id : req.params.id
+    }).populate("user");
+
+    let index = post.likes.indexOf(req.user.userid);
+
+    if (index === -1){
+        post.likes.push(req.user.userid);
+    } else {
+        post.likes.splice(index , 1);
+    }
+    
+    await post.save();
+
+    res.redirect(`/profile/${req.user.userid}`);
+})
+
+app.get("/posts/like/:id", isLoggedIn, async (req, res) => {
+
+    let post = await postModel.findOne({
+        _id : req.params.id
+    }).populate("user");
+
+    let index = post.likes.indexOf(req.user.userid);
+
+    if (index === -1){
+        post.likes.push(req.user.userid);
+    } else {
+        post.likes.splice(index , 1);
+    }
+    
+    await post.save();
+
+    res.redirect(`/posts`);
 })
 
 app.listen(3000);
