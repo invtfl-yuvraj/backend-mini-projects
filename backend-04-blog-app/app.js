@@ -68,7 +68,7 @@ app.post("/login", async (req, res) => {
             res.cookie("token", token);
             res.status(200).redirect(`/profile/${user._id}`);
         }
-        else res.redirect("/login");
+        else res.status(500).send("Something went wrong");
     })
 })
 
