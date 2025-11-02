@@ -1,13 +1,8 @@
 import { StatusCodes } from "http-status-codes";
 import NotImplementedError from "../errors/notImplemented.error.js";
+import { healthCheck } from "../utils/healthCheck.js";
 
-export const pingProblemController = (req, res) => {
-    return res.status(StatusCodes.OK).json({
-      success: true,
-      message: "Problem controller is alive",
-      data: {},
-    });
-};
+export const pingProblemController = healthCheck("Problem Service Controller");
 
 export const addProblem = (req, res, next) => {
   try {
