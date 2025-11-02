@@ -5,15 +5,14 @@ import SERVER_CONFIG from './config/server.config.js';
 import apiRouter from './routes/index.js';
 import { errorHandler } from './utils/errorHandler.js';
 import { dbConnect } from './config/dbConnect.config.js';
+import { healthCheck } from './utils/healthCheck.js';
 
 const app = express();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.get('/ping', (req, res) => {
-  res.json({ message: 'Service is alive' });
-});
+app.get('/ping', healthCheck("Server"));
 
 // all api routes will be prefixed with /api
 app.use("/api", apiRouter);
