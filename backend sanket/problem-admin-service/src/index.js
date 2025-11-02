@@ -3,6 +3,7 @@ import bodyParser from 'body-parser';
 
 import { PORT } from './config/server.config.js';
 import apiRouter from './routes/index.js';
+import { errorHandler } from './utils/errorHandler.js';
 
 
 const app = express();
@@ -15,6 +16,8 @@ app.get('/ping', (req, res) => {
 });
 
 app.use("/api", apiRouter);
+
+app.use(errorHandler);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
