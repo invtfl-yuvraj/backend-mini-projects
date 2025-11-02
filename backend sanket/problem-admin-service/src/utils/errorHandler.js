@@ -1,7 +1,8 @@
 import BaseError from "../errors/base.error.js";
 import { StatusCodes } from "http-status-codes";
+import SERVER_CONFIG from "../config/server.config.js";
 
-const isDev = process.env.NODE_ENV !== 'production';
+const isDev = SERVER_CONFIG.NODE_ENV !== 'production';
 
 export function errorHandler(err, req, res, next) {
     if (err instanceof BaseError){
