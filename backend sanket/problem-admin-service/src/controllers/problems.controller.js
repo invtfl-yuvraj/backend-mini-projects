@@ -43,9 +43,16 @@ export const getAllProblems =  async (req, res, next) => {
   }
 };
 
-export const getProblemById = (req, res, next) => {
+export const getProblemById = async (req, res, next) => {
   try {
-    throw new NotImplementedError("getProblemById", { reason : "Functionality is pending..." });
+    const { id } = req.params;
+    const problem = await problemService.getProblemById(id);
+    return res.status(StatusCodes.OK).json({
+      success: true,
+      message: "Problem fetched successfully",
+      error: {},
+      data: problem,
+    });
   } catch (error) {
     next(error);
   }

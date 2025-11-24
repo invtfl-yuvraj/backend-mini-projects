@@ -36,6 +36,18 @@ class ProblemService{
             throw error;
         }
     }
+
+    async getProblemById(problemId) {
+
+        try {
+            const problem = await this.problemRepository.getProblemById(problemId);
+            return problem;
+            
+        } catch (error) {
+            console.error(`Error fetching problem with ID ${problemId}:`, error);
+            throw error;
+        }
+    }
 }
 
 export default ProblemService;
