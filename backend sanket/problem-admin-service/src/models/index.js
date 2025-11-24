@@ -1,3 +1,3 @@
-import Problem from "./problem.model";
+import Problem from "./problem.model.js";
 
 export { Problem };

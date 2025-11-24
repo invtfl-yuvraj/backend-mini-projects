@@ -1,12 +1,25 @@
 import { StatusCodes } from "http-status-codes";
 import NotImplementedError from "../errors/notImplemented.error.js";
 import { healthCheck } from "../utils/healthCheck.js";
+import { ProblemService } from "../services/index.js";
+import { ProblemRepository } from "../repositories/index.js";
+
+const problemService = new ProblemService(new ProblemRepository());
 
 export const pingProblemController = healthCheck("Problem Service Controller");
 
-export const addProblem = (req, res, next) => {
+export const addProblem = async(req, res, next) => {
   try {
-    throw new NotImplementedError("addProblem", { reason : "Functionality is pending...", requestBody: req.body });
+    
+    console.log("Incoming request body:", req.body);
+    const newProblem = await problemService.createProblem(req.body);
+    
+    return res.status(StatusCodes.CREATED).json({
+      success: true,
+      message: "Problem created successfully",
+      error: {},
+      data: newProblem,
+    });
   } catch (error) {
     next(error);
   }
