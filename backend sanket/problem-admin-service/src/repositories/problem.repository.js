@@ -1,4 +1,5 @@
 import { Problem } from "../models/index.js";
+import NotFoundError from "../errors/notFound.error.js";
 
 class ProblemRepository {
   async createProblem(problemData) {
@@ -27,9 +28,18 @@ class ProblemRepository {
 
   async getProblemById(problemId) {
     try {
+      console.log("Fetching problem with ID:", problemId);
+
       const problem = await Problem.findById(problemId);
+
+      if (!problem) {
+        throw new NotFoundError(problemId, { reason: "Invalid problem ID" });
+      }
       return problem;
     } catch (error) {
+      if (error.name === "CastError") {
+        throw new NotFoundError(problemId, { reason: "Invalid problem ID" });
+      }
       console.log(error);
       throw error;
     }
