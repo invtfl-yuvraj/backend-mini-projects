@@ -24,6 +24,18 @@ class ProblemService{
             throw error;
         }
     }
+
+    async getAllProblems() {
+
+        try {
+            const problems = await this.problemRepository.getAllProblems();
+            return problems;
+            
+        } catch (error) {
+            console.error("Error fetching all problems:", error);
+            throw error;
+        }
+    }
 }
 
 export default ProblemService;
