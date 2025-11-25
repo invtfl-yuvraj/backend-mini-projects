@@ -66,9 +66,16 @@ export const updateProblemById = (req, res, next) => {
   }
 };
 
-export const deleteProblemById = (req, res, next) => {
+export const deleteProblemById = async (req, res, next) => {
   try {
-    throw new NotImplementedError("deleteProblemById", { reason : "Functionality is pending..." });
+    const { id } = req.params;
+    const result = await problemService.deleteProblemById(id);
+    return res.status(StatusCodes.OK).json({
+      success: true,
+      message: "Problem deleted successfully",
+      error: {},
+      data: result,
+    });
   } catch (error) {
     next(error);
   }

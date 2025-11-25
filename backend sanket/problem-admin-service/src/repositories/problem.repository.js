@@ -44,6 +44,22 @@ class ProblemRepository {
       throw error;
     }
   }
+
+  async deleteProblemById(problemId) {
+    try {
+      const result = await Problem.findByIdAndDelete(problemId);
+      if (!result) {
+        throw new NotFoundError(problemId, { reason: "Invalid problem ID" });
+      }
+      return result;
+    } catch (error) {
+      if (error.name === "CastError") {
+        throw new NotFoundError(problemId, { reason: "Invalid problem ID" });
+      }
+      console.log(error);
+      throw error;
+    }
+  }
 }
 
 export default ProblemRepository;

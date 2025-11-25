@@ -48,6 +48,18 @@ class ProblemService{
             throw error;
         }
     }
+
+    async deleteProblemById(problemId) {
+
+        try {
+            const result = await this.problemRepository.deleteProblemById(problemId);
+            return result;
+            
+        } catch (error) {
+            console.error(`Error deleting problem with ID ${problemId}:`, error);
+            throw error;
+        }
+    }
 }
 
 export default ProblemService;
