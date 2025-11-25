@@ -1,6 +1,7 @@
 import BaseError from "../errors/base.error.js";
 import { StatusCodes } from "http-status-codes";
 import SERVER_CONFIG from "../config/server.config.js";
+import logger from "../config/logger.config.js";
 
 const isDev = SERVER_CONFIG.NODE_ENV !== 'production';
 
@@ -17,7 +18,7 @@ export function errorHandler(err, req, res, next) {
         });
     }
 
-    console.error("Unhandled Error:", err);
+    logger.error("Something went wrong with an Unhandled Error:", err);
 
     return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
         success: false,
