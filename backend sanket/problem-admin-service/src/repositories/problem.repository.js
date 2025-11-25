@@ -1,5 +1,6 @@
 import { Problem } from "../models/index.js";
 import NotFoundError from "../errors/notFound.error.js";
+import logger from "../config/logger.config.js";
 
 class ProblemRepository {
   async createProblem(problemData) {
@@ -28,19 +29,21 @@ class ProblemRepository {
 
   async getProblemById(problemId) {
     try {
-      console.log("Fetching problem with ID:", problemId);
+      logger.info(`Problem.Repository: Fetching problem with ID: ${problemId}`);
 
       const problem = await Problem.findById(problemId);
 
       if (!problem) {
+        logger.error(`Problem.Repository: Problem with ID ${problemId} not found.`);
         throw new NotFoundError(problemId, { reason: "Invalid problem ID" });
       }
       return problem;
     } catch (error) {
       if (error.name === "CastError") {
+        logger.error(`Problem.Repository: Problem with ID ${problemId} not found.`);
         throw new NotFoundError(problemId, { reason: "Invalid problem ID" });
       }
-      console.log(error);
+      logger.error(`Problem.Repository: Error occurred while fetching problem with ID ${problemId}: ${error.message}`);
       throw error;
     }
   }
@@ -49,14 +52,16 @@ class ProblemRepository {
     try {
       const result = await Problem.findByIdAndDelete(problemId);
       if (!result) {
+        logger.error(`Problem.Repository: Problem with ID ${problemId} not found for deletion.`);
         throw new NotFoundError(problemId, { reason: "Invalid problem ID" });
       }
       return result;
     } catch (error) {
       if (error.name === "CastError") {
+        logger.error(`Problem.Repository: Problem with ID ${problemId} not found for deletion.`);
         throw new NotFoundError(problemId, { reason: "Invalid problem ID" });
       }
-      console.log(error);
+      logger.error(`Problem.Repository: Error occurred while deleting problem with ID ${problemId}: ${error.message}`);
       throw error;
     }
   }
